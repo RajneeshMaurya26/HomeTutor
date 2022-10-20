@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+
+<style>
+    .err {
+        font-size: 16px;
+        color: blue;
+    }
+    .log {
+        border:2px solid black;
+    }
+</style>
+
+@{
+if(TempData["msg"]!=null)
+{
+    <script>
+        alert('@TempData["msg"]');
+    </script>
+}
+if(ViewBag.msg!=null)
+{
+    <script>
+        alert('@ViewBag.msg');
+    </script>
+}
+} 
+<div class="col-sm-12">
+    <div class="col-sm-12 pt-4"></div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 form log">
+            <h1 class="text-center">Login Here</h1>
+             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new {enctype="multipart/form-data"}))
+             {
+                <div class="input-group flex-nowrap">
+                   <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">$</span>
+                   </div>
+                    @Html.TextBox("Username", null, new { @class = "form-control", placeholder = "Email", type="email",required="required"})
+                </div>
+                <br />
+                 <div class="input-group flex-nowrap">
+                   <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">!</span>
+                   </div>
+                    @Html.TextBox("Userpass", null, new {@class="form-control",placeholder="Password",type="password",required="required"})
+                </div>
+                <br />
+                 <div class="input-group flex-nowrap">
+                   <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">!</span>
+                   </div>
+                   <select name="Utype" class="form-control">
+                       <option>--Select User Type --</option>
+                       <option>Admin</option>
+                       <option>Tutor</option>
+                   </select>
+                </div>
+                 <br />
+                <input type="submit" value="Login" class="btn btn-success btn-lg btn-block" />
+                <br />
+             }
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5 btn btn-outline-success my-2 my-sm-0">
+                        <span style="font-size:20px;cursor:pointer" class=" fa fa-user-circle  btn-block" onclick="openNav()" >Forget Password</span>
+                    </div>
+                    &nbsp;
+                    <div class="col-sm-4 btn btn-outline-success my-2 my-sm-0">
+                        @Html.ActionLink("SignUp","Registration","Home",null,new {@class=" fa fa-user-circle btn-block"})
+                        
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+               <br />
+              
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+<div class="col-sm-12 pt-4"></div>
+
+<!-- Forget Password -->
+<style>
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 130px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+</style>
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">X</a>
+  <div class="overlay-content">
+    <div class="col-sm-12">
+        <h1 class="text-center text-success">Forget Your Password Here</h1>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                @using (Html.BeginForm("ForgetPass", "Home", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                {
+                    @Html.TextBox("Email", null, new {@class="form-control",placeholder="Enter Your Email",required="required"})
+                    <br />
+                    <br />
+                    <input type="submit" value="Get OTP" class="btn btn-success" />
+
+                }
+                
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+        document.getElementById("myNav").style.width = "0%";
+    }
+</script>

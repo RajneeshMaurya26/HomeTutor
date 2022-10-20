@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "ManageTutorProfile";
+    Layout = "~/Views/Shared/Adminzone_Comman_Layout.cshtml";
+}
+@using System.Data
+@using demoproject.Models
+@{
+    if(TempData["Msg"] != null)
+    {
+      <script>
+          alert('@TempData["Msg"]');
+      </script>   
+    }
+}
+<div class="col-sm-12">
+    <br />
+    <br />
+    <h2> Manage Tutor Profile</h2>
+    <hr />
+</div>
+<div class="12">
+         <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Data Table</div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <table id="default-datatable" class="table table-bordered">
+                <thead>
+                    <tr>
+                <th>S.NO</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>Subject</th>
+                <th>City</th>
+                <th>Qualification</th>
+                <th>Experience</th>
+                <th>M.Number</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Date_Of_Reg.</th>
+                        <th>Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                   <tr>
+          @{
+              DBManager dm =new DBManager();
+              dm.MyCommandText = "Select * from Tutor_Registration order by Email desc";
+              DataTable dt = dm.ReadBulkRecord();
+              int n=1;
+              foreach(DataRow dr in dt.Rows)
+              { 
+                    <tr>
+                    <td>@n</td>
+                    <td>@dr["Name"]</td>
+                    <td>@dr["Gender"]</td>
+                    <td>@dr["DOB"]</td>
+                    <td>@dr["Subject"]</td>
+                        <td>@dr["City"]</td>
+                        <td>@dr["Qualification"]</td>
+                        <td>@dr["Experience"]</td>
+                    <td>@dr["Number"]</td>
+                     <td>@dr["Address"]</td>
+                    <td>@dr["Email"]</td>
+                    <td><img height="60px" width="70px" src="/Content/Tutor_Photo/@dr["Photo"]" /></td>
+                        <td>@dr["Date_OF_Registration"]</td>
+                        <td><a href="DelTProfile?p=@dr["Email"]"><span class="btn btn-info">Delete</span></a></td>
+                    </tr>
+                  n++;
+              }
+              
+            }
+    </tr>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                <th>S.NO</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>Subject</th>
+                <th>City</th>
+                <th>Qualification</th>
+                <th>Experience</th>
+                <th>M.Number</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Date_Of_Reg.</th>
+                        <th>Manage</th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Row-->
+</div>

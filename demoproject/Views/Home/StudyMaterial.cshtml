@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "StudyMaterial";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+@using demoproject.Models
+@using System.Data
+    <div class="col-sm-12">
+        <h1 style="padding:5%;color:maroon;"> Study Material</h1>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+<div class="col-sm-10>
+<div class="12">
+         <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Data Table</div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <table id="default-datatable" class="table table-bordered">
+                <thead>
+                    <tr>
+            <th>SrNo</th>
+            <th>SUBJECT</th>
+            <th>Description</th>
+            <th>Uploaded Date</th>
+            <th>Download Here</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                                   <tr>
+          @{ DBManager dm=new DBManager();
+           dm.MyCommandText="Select * from StudyMaterial order by Id desc";
+           DataTable dt= dm.ReadBulkRecord();
+           int n=1;
+           foreach(DataRow dr in dt.Rows)
+           {
+               string file="/Content/StudyMaterial/"+dr["FileName"];
+            <tr>
+            <td>@n</td>
+            <td>@dr["Name"]</td>
+            <td>@dr["Description"]</td>
+            <td>@dr["Date_Of_Submission"]</td>
+                <td><a href="@file"download>DownLoad</a></td>
+        </tr>
+        }}
+    </tr>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                       <th>SrNo</th>
+            <th>SUBJECT</th>
+            <th>Description</th>
+            <th>Uploaded Date</th>
+            <th>Download Here</th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+    </div>
+        <div class="col-sm-1"></div>
+        </div>
+

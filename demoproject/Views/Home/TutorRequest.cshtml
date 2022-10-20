@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "TutorRequest";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+
+@{
+    if(ViewBag.msg != null)
+    {
+     <script>
+         alert('@ViewBag.msg');
+     </script>   
+    }
+}
+<script>
+    $(document).ready(function () {
+        var v = window.location.href.lastIndexOf('=');
+        if (v > 0) {
+            var m = window.location.href.substr(v + 1);
+            $("#RequestId").val(m);
+        }
+    
+    });
+</script>
+<div class="col-sm-12">
+    <br />
+    <h1 class="text-center"> Request For Tution</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="border:1px solid black;">
+            @using(Html.BeginForm("TutorRequest","Home",FormMethod.Post,new {enctype="multipart/form-data",id="TutorRequest"}))
+            {
+  <div class="form-row">
+      &nbsp;
+    <div class="col-sm-12">
+        @Html.TextBox("RequestId", null, new { style="display:none;"})
+        @Html.TextBox("Name", null, new { @class = "form-control",placeholder="Enter Your Name",id="Tname"})
+     
+    </div>
+    <div class="col-sm-12">
+      <label style="font-size:20px;">Gender: </label> &nbsp;
+        @Html.RadioButton("Gender", "Male",true, new {@class="input-control"})<label>Male</label>&nbsp;&nbsp;
+        @Html.RadioButton("Gender", "Female",false, new {@class="input-control"}) <label >Female</label>&nbsp;&nbsp;
+        @Html.RadioButton("Gender", "Other",false, new {@class="input-control"})<label >Other</label>
+    </div>
+       &nbsp;
+        <div class="col-sm-12">
+        @Html.DropDownList("Course", null,"--Select Course / Class--", new { id="Tcourse",@class="form-control"})
+    </div>
+      &nbsp;
+    <div class="col-sm-12">
+        @Html.DropDownList("Subject", null,"--Select Subject To Teach--", new { id="Tsubject",@class="form-control"})
+    </div>
+     &nbsp; 
+       &nbsp;
+      <div class="col-sm-12">
+           @Html.TextBox("Email", null, new {@class="form-control",placeholder="Enter Your Email",id="Temail"})
+    </div>&nbsp;
+       
+      <div class="col-sm-12">
+           @Html.TextBox("Mob_Number", null, new {@class="form-control",placeholder="Mobile Number",id="Tnumber"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+          @Html.TextBox("Address", null, new {@class="form-control",placeholder="Full Address",id="Taddress"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+           @Html.TextBox("Budget", null, new {@class="form-control",placeholder="Expected Fee (Budget) Per Month",id="Tfee"})
+    </div>
+      &nbsp;
+       <div class="col-sm-12">
+           @Html.TextBox("ExpectedDate", null, new {@class="form-control",placeholder="Expected Date to Start Tution(dd/mm/yy)",id="Tdate"})
+    </div>
+       &nbsp;
+      <div class="col-sm-12">
+          @Html.TextBox("Description", null, new {@class="form-control",placeholder="Discription",id="description"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+      <input type="submit" value="submit" class="form-control btn btn-success" id="btnTsave" />
+    </div>
+       &nbsp;
+ </div>
+            }
+             
+            
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    
+</div>
+
+
+<!-- Validate TutorRequest Form -->
+<script>
+    $(document).ready(function () {
+        var marks = 0;
+        $("#btnTsave").click(function () {
+            var spOpen, spClose, msg, txt, x, status = true;
+            spOpen = "<span class='err'>";
+            spClose = "</span>";
+            $(".err").remove(); //to remove all line msg...
+            // To validate name...
+            txt = $("#Tname").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Name";
+                status = false;
+                $("#Tname").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 2) {
+                msg = "Please Enter Your Valid Name";
+                status = false;
+                $("#Tname").after(spOpen + msg + spClose);
+            }
+            // To validate Address
+            txt = $("#Taddress").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Address";
+                status = false;
+                $("#Taddress").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 3) {
+                msg = "Please Enter Your Valid Address";
+                status = false;
+                $("#Taddress").after(spOpen + msg + spClose);
+            }
+
+            // To validate Need
+            txt = $("#Tneed").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Need";
+                status = false;
+                $("#Tneed").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 5) {
+                msg = "To Short Word";
+                status = false;
+                $("#Tneed").after(spOpen + msg + spClose);
+            }
+            // To Validate Subject DDL..
+            txt = $("#Tsubject").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Select Subject To Teach";
+                status = false;
+                $("#Tsubject").after(spOpen + msg + spClose);
+            }
+            // To Validate Course..
+            txt = $("#Tcourse").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Select Course/Class";
+                status = false;
+                $("#Tcourse").after(spOpen + msg + spClose);
+            }
+           
+            // To Validate Date..
+            txt = $("#Tdate").val().trim();
+            if (txt.length == 0) {
+                msg = "Enter Date To Start";
+                status = false;
+                $("#Tdate").after(spOpen + msg + spClose);
+            }
+            // To validate Fee
+            txt = $("#Tfee").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Expected (Buget) per Month";
+                status = false;
+                $("#Tfee").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 3) {
+                msg = " Your Expected (Buget) per Month is So small amount";
+                status = false;
+                $("#Tfee").after(spOpen + msg + spClose);
+            }
+            //to Validate mob no..
+            txt = $("#Tnumber").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Mobile number";
+                status = false;
+                $("#Tnumber").after(spOpen + msg + spClose);
+            }
+            else if (txt.length == 10 || txt.length == 12) {
+                var first = txt.length == 12 ? txt.charAt(2) : txt.charAt(0);
+                if (txt.length == 12) {
+                    if (txt.substr(0, 2) != '91') {
+                        msg = "Invalid Mobile Number";
+                        status = false;
+                        $("#Tnumber").after(spOpen + msg + spClose);
+                    }
+                }
+                // To Check first Digit
+                if (status == true)
+                    if (first < 6 || first > 9) {
+                        msg = "Invalid Indian Mobile Number";
+                        status = false;
+                        $("#Tnumber").after(spOpen + msg + spClose);
+                    }
+            }
+            else {
+                msg = "Invalid Mobile Number";
+                status = false;
+                $("#Tnumber").after(spOpen + msg + spClose);
+            }
+
+            // To validate email
+            var em = $("#Temail").val().trim();
+            if (em.length == 0) {
+                msg = "<span class='err'>Please enter email id.</span>";
+                status = false;
+            }
+            else {
+                // Check for
+                var s = em.indexOf('@@');
+                if (s <= 0 || (em.length - s) < 5) {
+                    msg = "<span class='err'>Invalid email id.</span>";
+                    status = false;
+
+                }
+                // Check for .
+                s = em.indexOf('.');
+                if (s <= 0 || (em.length - s) < 3) {
+                    msg = "<span class='err'>Invalid email id.</span>";
+                    status = false;
+                }
+            }
+            if (msg.length > 0)
+                $("#Temail").after(msg);
+           
+            return status;
+            if (status == true)
+            {
+                $("#TutorRequest").submit();
+            }
+            
+
+        });
+
+    });
+</script>

@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+@{
+    if(TempData["Msg"] !=null)
+    {
+        <script>
+            alert(TempData["Msg"]);
+        </script>
+    }
+}
+@using demoproject.Models
+@using System.Data
+
+<script>
+    $(document).ready(function () {
+        $(".request").click(function () {
+            var t = $(this).attr("data-tutorid");
+            window.location.href = '/Home/TutorRequest?tid='+t;
+        });
+    });
+</script>
+<!-- Notification Start -->
+
+<!-- Notification End -->
+<!-- Carousel Start -->
+<div class="col-sm-12" style="padding:0;margin:0px;"> 
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="~/Content/img/12.jpg" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="~/Content/img/23.jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="~/Content/img/5.jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+    </div>
+<!-- Carousel End -->
+<!-- Search Bar start -->
+<div class="col-sm-12">
+    <form action="/" method="post">
+        <div class="row tutor pt-4">
+            <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+          @Html.DropDownList("City", null,"--Select City--", new {@class="form-control"})
+        </div>
+        <div class="col-sm-4">
+         @Html.DropDownList("Subject", null,"--Select Subject--", new { @class="form-control"})
+    </div>
+    <div class="col-sm-2">
+        <input type="submit" value="Search" class="form-control btn btn-info" />
+    </div>
+            
+            </div><br />
+         </form>
+    
+</div>
+<div class="col-sm-12">
+    <div class="row tutor pt-4" style="background:#ecf2f5;min-height:100px;">
+        @{
+            DBManager dm = new DBManager();
+            string c="", s="";
+            if(!IsPost)
+            {
+            dm.MyCommandText = "Select top 4 * from Tutor_Registration order by Experience desc";
+            }
+            else
+            {
+                 c=Request["City"];
+                 s=Request["Subject"];
+                dm.MyCommandText = "Select top 4 * from Tutor_Registration where City like '%"+c+"%' and Subject like '%"+
+                    s+"%' order by Experience desc";
+            }
+            DataTable dt = dm.ReadBulkRecord();
+            if(dt.Rows.Count>0)
+            {
+                foreach(DataRow dr in dt.Rows)
+                {
+                 <div class="col-sm-3">
+                     <div class="card">
+                         <img class="card-img-top" src="/Content/Tutor_Photo/@dr["Photo"]" width="80px" height="200px;" />
+                         <div class="crad-body">
+                    <span>Name:</span> <span style="color:blue;font-size:14px;"> @dr["Name"]</span><br />
+                     <span>Subjects:</span> <span style="color:blue;font-size:14px;"> @dr["Subject"]</span><br />
+                          <span>Highest Qualification:</span>   <span style="color:blue;font-size:14px;"> @dr["Qualification"]</span><br />
+                    <span>Year Of Experience: </span> <span style="color:blue;font-size:14px;">@dr["Experience"]</span> <br />
+                     
+                         </div>
+                         <input type="button" value="Request For Tutuion" class="form-control btn btn-success request" data-tutorid="@dr["Email"]" />
+                         </div>
+                 </div>   
+        }
+        }
+        else
+        {
+             <div class="col-sm-12 text-center">
+                 <span style="font-size:30px; color:Red;padding-top:30px;">Soory! No Tutors Found In @c for @s</span>
+             </div>   
+            }
+        }
+        <br />
+        </div>
+    </div>
+
+
+                <div class="col-sm-12 pt-4">
+    <hr />
+    <h1 class="text-center" >Objective of Home Tutor's(<b>Educef</b>)</h1>
+    &nbsp;
+    <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+     <p>
+           <b> We have to used to combination  of several surveys, focus group, and one-on-one interviews to gather information from different students, tutors
+            , and from key personal at other institutions that have math's/physics students. After gathering requirements, we have decided the following aims
+            and objectives of HomeTuor's.com.</b></p>
+            <div class="col-sm-12 d-block p-2 bg-success text-white"># To provide anytime/Anywhere tutor searching.</div>
+            <div class="col-sm-12 d-block p-2 bg-primary text-white"># Enabling knowledge sharing at lower economies.</div>
+            <div class="col-sm-12 d-block p-2 bg-success text-white"># Easy for the student to use and customize.</div>
+            <div class="col-sm-12 d-block p-2 bg-primary text-white"># To provide to search best tutors.</div>
+            <div class="col-sm-12 d-block p-2 bg-success text-white"># To provides student Reviews.</div>
+            <div class="col-sm-12 d-block p-2 bg-primary text-white"># To provides Tutor Reviews.</div> 
+             <div class="col-sm-12 d-block p-2 bg-success text-white"># To provides best tutors in minimum cost.</div>
+             <div class="col-sm-12 d-block p-2 bg-primary text-white"># Event Notification to student.</div>
+             <div class="col-sm-12 d-block p-2 bg-success text-white"># Easily accessible from any corner of the world if you have to internet connection.</div> 
+        
+        </div>
+        &nbsp;
+    <div class="col-sm-2"></div>
+        </div>
+</div>
+
+<div class="col-sm-12 pt-4">
+    <hr />
+    <h1 class="text-center" >Achievement Of Home Tutor's(<b>Educef</b>)</h1>
+    &nbsp;
+    <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+     <p align="justify">
+           <b> We have to used to combination  of several surveys, focus group, and one-on-one interviews to gather information from different students, tutors
+            , and from key personal at other institutions that have math's/physics students. After gathering requirements, we have decided the following aims
+            and objectives of HomeTuor's.com.</b>
+           <div class="progress">
+            <div class=" progress progress-bar progress-bar-striped progress-bar-animated" role="progressbar" title="Teacher's Faculty" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+           </div>
+        </p>
+        </div>
+        &nbsp;
+    <div class="col-sm-2"></div>
+        </div>
+</div>
+
+
+
+
+

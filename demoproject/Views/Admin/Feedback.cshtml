@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/Adminzone_Comman_Layout.cshtml";
+}
+@using System.Data
+@using demoproject.Models
+<div class="12">
+    <h2>FeedBack</h2>
+    <hr />
+</div>
+
+<div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Manage Notification</div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <table id="default-datatable" class="table table-bordered">
+            <thead>
+            <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Reviews</th>
+                <th>Review Date</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+                    <tr role="row">
+          @{
+              DBManager dm =new DBManager();
+              dm.MyCommandText ="Select * from Feedback order by Id desc";
+              DataTable dt = dm.ReadBulkRecord();
+              int n=1;
+              foreach(DataRow dr in dt.Rows)
+              { 
+                    <tr>
+                    <td>@n</td>
+                    <td>@dr["Name"]</td>
+                    <td>@dr["Reviews"]</td>
+                    <td>@dr["Date_Of_Feedback"]</td>
+                    <td><a href="DelFeedback?n=@dr["Id"]">Delete</a></td>
+                    </tr>
+                  n++;
+              }
+              
+            }
+                    </tr>
+                    
+                    </tbody>
+        <tfoot>
+            <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Reviews</th>
+                <th>Review Date</th>
+                <th>Manage</th>
+            </tr>
+        </tfoot>
+            </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Row-->
+<table id="example" class="display nowrap" style="width:100%">
+        
+    </table>

@@ -1,0 +1,379 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Content/JS/jquery-3.4.1.min.js"></script>
+    <script src="~/Content/JS/bootstrap.min.js"></script>
+    <script src="~/Content/JS/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/bootstrap-grid.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="~/Content/CSS/hover-min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/hover.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Home Tutor's</title>
+        <style>
+        .err {
+        font-size: 16px;
+        color: blue;
+    }
+</style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row sticky-top" style="background:#f1f3f4;border-bottom:1px solid black;">
+            <div class="col-sm-3" style="padding:15px; margin:0;">
+            <img src="~/Content/img/Logo-header.png" />
+                </div>
+             <div class="col-sm-9" style="padding:15px; margin:0;">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto " >
+      <li class="nav-item active ">
+           @Html.ActionLink("Home","Index","Home",null,new {@class="nav-link c hvr-float-shadow"})
+      </li>
+      <li class="nav-item active">
+          @Html.ActionLink("About", "About", "Home", null, new {@class="nav-link  hvr-float-shadow"})
+      </li>
+      <li class="nav-item active">
+          @Html.ActionLink("Contact", "Contact", "Home", null, new {@class="nav-link hvr-float-shadow"})
+      </li>
+        <li class="nav-item active">
+            @Html.ActionLink("Tutor's Registration","Registration","Home",null,new {@class="nav-link hvr-float-shadow"})
+        
+      </li>
+        <li class="nav-item active">
+        @Html.ActionLink("Student_Review","Review","Home",null,new {@class="nav-link hvr-float-shadow"})
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+       @Html.ActionLink("Login","Login","Home",null,new {@class="btn btn-outline-success my-2 my-sm-0"})&nbsp;&nbsp;&nbsp;
+        <span class="btn btn-outline-success my-2 my-sm-0"  style="cursor:pointer;" onclick="openNav1()" >Enquiry</span>&nbsp;&nbsp;&nbsp;
+        @Html.ActionLink("StudyMaterial","StudyMaterial","Home",null,new {@class="btn btn-outline-success my-2 my-sm-0"})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </form>
+  </div>
+</nav> 
+        </div>
+        </div>
+            <div class="row">
+                     @RenderBody()
+                </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12" style="padding:0;margin:0;">
+                <h1 class="text-center text-success">YOU FIND ME HERE</h1>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.3075794212086!2d80.8693063143272!3d25.192847838060658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3984a7d8354a53d1%3A0x55f946b2ed4bae6a!2sKamadgiri%20Software%20Solutions%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1583649544676!5m2!1sen!2sin"width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-12" style="padding:0;margin:0;">
+           <!-- Footer -->
+<footer class="page-footer font-small bg-blue pt-4" style="background:#000000;">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5><img src="~/Content/img/Logo-header.png" /></h5>
+        <p>Here you can use rows and columns to organize your footer content.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase" style="Color:white;">Quick Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Home</a>
+          </li>
+          <li>
+            <a href="#!">About</a>
+          </li>
+          <li>
+            <a href="#!">Contact</a>
+          </li>
+          <li>
+            <a href="#!">Login</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase" style="Color:white;">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Link 1</a>
+          </li>
+          <li>
+            <a href="#!">Link 2</a>
+          </li>
+          <li>
+            <a href="#!">Link 3</a>
+          </li>
+          <li>
+            <a href="#!">Link 4</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mykss.in/"> HomeTutor's.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+            </div>
+            </div>
+        
+
+        <!-- Enquiry Start Here -->
+<style>
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.overlay1 {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content1 {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay1 a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay1 a:hover, .overlay1 a:focus {
+  color: #f1f1f1;
+}
+
+.overlay1 .closebtn1 {
+  position: absolute;
+  top: 60px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@@media screen and (max-height: 450px) {
+  .overlay1 {overflow-y: auto;}
+  .overlay1 a {font-size: 20px}
+  .overlay1 .closebtn1 {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+</style>
+
+
+<div id="myNav1" class="overlay1">
+  <a href="javascript:void(0)" class="closebtn1" onclick="closeNav1()">x</a>
+  <div class="overlay-content1">
+      <div class="row">
+          <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            
+            @using(Html.BeginForm("Enquiry","Home",FormMethod.Post,new {enctype="multipart/form-data",id="EnquiryForm"}))
+            {
+        @Html.TextBox("Name", null, new {@class="form-control",placeholder="Enter First Name",id="Ename"})
+        <br />
+          @Html.TextBox("Email", null, new {@class="form-control",placeholder="Enter Email",id="Eemail"})
+                <br />
+    
+          @Html.TextBox("Mob_Number", null, new {@class="form-control",placeholder="Enter Mobile Number",id="Enumber"})
+                <br />
+    
+          @Html.TextBox("Topic", null, new {@class="form-control",placeholder="Enter Your Topic",id="topic"})
+                <br />
+   
+         @Html.TextArea("Query", null, new {style="resize:none;",@class="form-control",cols="6",rows="3",placeholder="Enter Your Query",id="query"})
+   
+        <br />
+     
+      <input type="submit" id="btnEnquiry" value="Submit" class="form-control bt btn-success"  />
+    
+            }
+            <br />
+        </div>
+      <div class="col-sm-4"></div>
+      </div>
+      </div>
+
+<script>
+    function openNav1() {
+        document.getElementById("myNav1").style.height = "100%";
+    }
+
+    function closeNav1() {
+        document.getElementById("myNav1").style.height = "0%";
+    }
+</script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnEnquiry").click(function () {
+            var spOpen, spClose, msg, txt, x, status = true;
+            spOpen = "<span class='err'>";
+            spClose = "</span>";
+            $(".err").remove(); //to remove all line msg...
+            // To validate name...
+            txt = $("#Ename").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Name";
+                status = false;
+                $("#Ename").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 2) {
+                msg = "Please Enter Your Valid Name";
+                status = false;
+                $("#Ename").after(spOpen + msg + spClose);
+            }
+            //to Validate mob no..
+            txt = $("#Enumber").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Mobile number";
+                status = false;
+                $("#Enumber").after(spOpen + msg + spClose);
+            }
+            else if (txt.length == 10 || txt.length == 12) {
+                var first = txt.length == 12 ? txt.charAt(2) : txt.charAt(0);
+                if (txt.length == 12) {
+                    if (txt.substr(0, 2) != '91') {
+                        msg = "Invalid Mobile Number";
+                        status = false;
+                        $("#Enumber").after(spOpen + msg + spClose);
+                    }
+                }
+                // To Check first Digit
+                if (status == true)
+                    if (first < 6 || first > 9) {
+                        msg = "Invalid Indian Mobile Number";
+                        status = false;
+                        $("#Enumber").after(spOpen + msg + spClose);
+                    }
+            }
+            else {
+                msg = "Invalid Mobile Number";
+                status = false;
+                $("#Enumber").after(spOpen + msg + spClose);
+            }
+            // To validate email
+            var em = $("#Eemail").val().trim();
+            if (em.length == 0) {
+                msg = "<span class='err'>Please enter email id.</span>";
+                status = false;
+            }
+            else {
+                // Check for
+                var s = em.indexOf('@@');
+                if (s <= 0 || (em.length - s) < 5) {
+                    msg = "<span class='err'>Invalid email id.</span>";
+                    status = false;
+
+                }
+                // Check for .
+                s = em.indexOf('.');
+                if (s <= 0 || (em.length - s) < 3) {
+                    msg = "<span class='err'>Invalid email id.</span>";
+                    status = false;
+                }
+            }
+            if (msg.length > 0)
+                $("#Eemail").after(msg);
+            // End Email
+            // To validate topic...
+            txt = $("#topic").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Topic";
+                status = false;
+                $("#topic").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 3) {
+                msg = "Too short words";
+                status = false;
+                $("#topic").after(spOpen + msg + spClose);
+            }
+            //end topic
+            // To validate name  ...
+            txt = $("#query").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Query";
+                status = false;
+                $("#query").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 15) {
+                msg = "Too short Words";
+                status = false;
+                $("#query").after(spOpen + msg + spClose);
+            }
+            return status;
+            if (status == true) {
+                $("#EnquiryForm").submit();
+            }
+        });
+    });
+    </script>
+    </div>
+        </div>
+</body>
+</html>
+

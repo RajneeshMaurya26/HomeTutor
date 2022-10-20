@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+<style>
+    .err {
+        font-size: 16px;
+        color: blue;
+    }
+</style> 
+    <script src="~/Content/JS/validate.js"></script>
+ <script>
+     $(document).ready(function () {
+         $("#ImgRefresh").click(function () {
+             $.getJSON("/Home/RefreshCaptcha", null, function (r) {// var EMAIL={email:m;}
+                 $("#ImgCaptcha").attr("src", "/Content/CaptchaImg/" + r);
+             })
+         });
+     });
+    </script>
+ 
+@{if(TempData["msg"] != null)
+{
+    <script>
+        alert('@TempData["msg"]');
+    </script>
+}
+}
+
+<div class="col-sm-12">
+    <h1 class="text-center">Welcome To Tutor's Registration</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="border:1px solid black;">
+            @using(Html.BeginForm("Registration","Home",FormMethod.Post,new {enctype="multipart/form-data",id="form"}))
+            {
+  <div class="form-row">
+      &nbsp;
+    <div class="col-sm-12">
+        @Html.TextBox("Name", null, new { @class = "form-control",placeholder="Enter Your Name",id="name"})
+     
+    </div>
+    <div class="col-sm-12">
+      <label style="font-size:20px;">Gender: </label> &nbsp;
+        @Html.RadioButton("Gender", "Male",true, new {@class="input-control"})<label>Male</label>&nbsp;&nbsp;
+        @Html.RadioButton("Gender", "Female",false, new {@class="input-control"}) <label >Female</label>&nbsp;&nbsp;
+        @Html.RadioButton("Gender", "Other",false, new {@class="input-control"})<label >Other</label>
+    </div>
+      <div class="col-sm-12">
+          <label style="font-size:20px;">D.O.B : </label> &nbsp;
+          @Html.TextBox("DOB", null, new {type="Date",@class="form-control"})
+    </div>
+      &nbsp;
+    <div class="col-sm-12">
+        @Html.DropDownList("Subject", null,"--Select Subject--", new { id="subjects",@class="form-control"})
+    </div>
+        &nbsp;
+        <div class="col-sm-12">
+        @Html.DropDownList("City", null,"--Select City--", new { id="city1",@class="form-control"})
+    </div>
+        &nbsp;
+      <div class="col-sm-12">
+         @Html.DropDownList("Qualification",null,"--Select Qualification-",new { id="qualification",@class="form-control"})
+        </div>
+        &nbsp;
+      <div class="col-sm-12">
+         @Html.DropDownList("Experience",null,"--Select Experience--",new { id="exp",@class="form-control"})
+    </div>
+     &nbsp; &nbsp;
+      <div class="col-sm-12">
+          @Html.TextBox("Address", null, new {@class="form-control",placeholder="Current Address",id="address"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+           @Html.TextBox("Number", null, new {@class="form-control",placeholder="Mobile Number",id="number"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+           @Html.TextBox("Email", null, new {@class="form-control",placeholder="Enter Your Email",id="email"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+       @Html.TextBox("Photo", null, new {@class="form-control",type="file",id="photo"})
+          
+    </div>
+       &nbsp;
+      <div class="col-sm-12">
+           @Html.TextBox("Password", null, new {@class="form-control",placeholder="Enter a Password",type="password",id="pass"})
+          <span id="sppass"></span>
+    </div>
+       &nbsp;
+      <div class="col-sm-12">
+           @Html.TextBox("C_Password", null, new {@class="form-control",placeholder="Confirm Your Password",type="password",id="cpass"})
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+          <div class="row">
+              <div class="col-1"></div>
+       <div class="col form-contol"><img height="35px" width="150px" id="ImgCaptcha" src="/Content/CaptchaImg/@ViewBag.captcha"/> &nbsp;
+            <img height="35px" width="50px" id="ImgRefresh" src="~/Content/img/refer.jpg"/></div>
+          <div class="col">
+              @Html.TextBox("ECaptcha", null, new {@class="form-control",placeholder="Enter Captcha"})
+          </div>
+              </div>
+    </div>
+      &nbsp;
+      <div class="col-sm-12">
+      <input type="submit" value="submit" class="form-control btn btn-success" id="btnsave" />
+    </div>
+       &nbsp;
+ </div>
+            }
+             
+            
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    
+</div>
+

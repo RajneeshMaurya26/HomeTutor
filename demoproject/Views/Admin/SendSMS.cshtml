@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "SendSMS";
+    Layout = "~/Views/Shared/Adminzone_Comman_Layout.cshtml";
+}
+@{
+    if(ViewBag.msg !=null)
+    {
+     <script>
+         alert('@ViewBag.msg');
+     </script>   
+    }
+}
+
+<div class="col-sm-12">
+    <br />
+    <br />
+    <h2>Send SMS</h2>
+    <hr />
+</div>
+<div class="col-sm-12">
+<div class="row">
+    <div class="col-sm-12" style="min-height:450px;">
+    <hr />
+        <br />
+            <div class="row">
+          <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="border:2px solid black;background:white;">
+            <br />
+            @using (Html.BeginForm("SendSMS", "Admin", FormMethod.Post, new {}))
+            {
+          @Html.TextBox("Mob_Number", null, new {@class="form-control",placeholder="Enter Mobile Number"})
+                <br />
+                 @Html.TextArea("Message", null, new {@class="form-control ",placeholder="Enter Message",cols="6", rows="6", style="resize:none"})
+                <br />
+     
+                 <input type="submit" id="btnEnquiry" value="Send SMS" class="form-control bt btn btn-info"  />
+    
+            }
+            <br />
+        </div>
+      <div class="col-sm-3"></div>
+      </div>
+        </div>
+    </div>
+</div>

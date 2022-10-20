@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/Adminzone_Comman_Layout.cshtml";
+}
+@{
+    if(TempData["Msg"] !=null)
+    {
+     <script>
+         alert('@TempData["Msg"]');
+     </script>   
+    }
+}
+<div class="col-sm-12">
+    <br />
+    <br />
+    <h2>Change_Password</h2>
+    <hr />
+</div>
+<div class="col-sm-12">
+<div class="row">
+    <div class="col-sm-12" style="min-height:450px;">
+    <hr />
+        <br />
+            <div class="row">
+          <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="border:2px solid black;background:white;">
+            <br />
+            @using (Html.BeginForm("ChangePass", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "EnquiryForm" }))
+            {
+          @Html.TextBox("OldPass", null, new {@class="form-control",placeholder="Enter Old Password"})
+                <br />
+          @Html.TextBox("NewPassword", null, new {@class="form-control",placeholder="Enter New Password"})
+                <br />
+                 @Html.TextBox("ConPassword", null, new {@class="form-control ",placeholder="Confirm New Password"})
+                <br />
+     
+                 <input type="submit" id="btnEnquiry" value="Submit" class="form-control bt btn btn-info"  />
+    
+            }
+            <br />
+        </div>
+      <div class="col-sm-3"></div>
+      </div>
+        </div>
+    </div>
+</div>

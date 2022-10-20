@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="col-sm-12">&nbsp;</div>
+    <div class="col-sm-12"></div>
+    <h1 class="text-center text-success"><u>Get In Touch !</u></h1>
+    <div class="row">
+
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <h3 class="title title-bar-primary4">Leave Us Message</h3>
+            <h4 class="text-success">@ViewBag.msg</h4>
+            @using(Html.BeginForm("Contact","Home",FormMethod.Post,new {enctype="multipart/form-data" ,id="ContactForm"}))
+            {
+            <div class="row">
+    <div class="col">
+        @Html.TextBox("FName", null, new {@class="form-control",placeholder="Enter Your Name ",id="Cname"})
+    </div>
+  </div>
+<br />
+      <div class="row">
+     <div class="col">
+          @Html.TextBox("Email", null, new {@class="form-control",placeholder="Enter Email",id="Cemail"})
+    </div>
+     </div>
+    <span>&nbsp;</span>
+    
+      <div class="row">
+     <div class="col">
+          @Html.TextBox("Number", null, new {@class="form-control",placeholder="Enter Mobile Number",id="Cnumber"})
+    </div>
+     </div>
+   <span>&nbsp;</span>
+      <div class="row">
+     <div class="col">
+         @Html.TextArea("Message", null, new {style="resize:none;",@class="form-control",cols="6",rows="3",id="message"})
+    </div>
+          
+     </div>
+<br />
+     
+      <div class="row">
+     <div class="col">
+      <input type="submit" id="btnContact" class="form-control bt btn-success" value="Send"/>
+    </div>
+     </div>
+            }
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
+            <h3 class="title title-bar-primary4">Address</h3>
+            &nbsp;
+            <div class="row">
+                <div class="col-sm-2"><span class="fa fa-forumbee text-left" style="font-size:20px;"></span></div>
+            
+            
+            <div class="col-sm-10">
+                <span><h6 style="font-size:15px;"><b>Kamadgiri Software Solutions Pvt. Ltd.</b></h6></span>
+                 near Ramayan Mela Parisar, Sitapur, Chitrakoot, Madhya Pradesh 210204
+            </div>
+                </div>
+            &nbsp;
+            <div class="row">
+                <div class="col-sm-2"><span class="fa fa-envelope" style="font-size:20px;"></span></div>
+            
+            
+            <div class="col-sm-10">
+                <span><h6 style="font-size:15px;"><b>example@example.com</b></h6></span>
+            </div>
+                </div>
+            &nbsp;
+             <div class="row">
+                <div class="col-sm-2"><span class="fa fa-phone" style="font-size:20px;"></span></div>
+            
+            
+            <div class="col-sm-10">
+                <span><h6 style="font-size:15px;"><b>+9119975097</b></h6></span>
+            </div>
+                </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+      $(document).ready(function(){
+        $("#btnContact").click(function(){
+        var spOpen,spClose,msg,txt,x,status=true;
+        spOpen="<span class='err'>";
+        spClose="</span>";
+        $(".err").remove(); //to remove all line msg...
+        // To validate name...
+        txt=$("#Cname").val().trim();
+        if (txt.length==0) {
+          msg="Please Enter Your Name";
+          status=false;
+          $("#Cname").after(spOpen+msg+spClose);
+        }
+        else if (txt.length<2) {
+          msg="Please Enter Your Valid Name";
+          status=false;
+          $("#Cname").after(spOpen+msg+spClose);
+        }
+        //to Validate mob no..
+        txt=$("#Cnumber").val().trim();
+        if (txt.length==0)
+        {
+          msg="Please Enter Mobile number";
+          status=false;
+          $("#Cnumber").after(spOpen+msg+spClose);
+        }
+        else if (txt.length==10 || txt.length==12)
+         {
+          var first=txt.length==12?txt.charAt(2):txt.charAt(0);
+          if (txt.length==12)
+           {
+             if (txt.substr(0,2)!='91')
+             {
+               msg="Invalid Mobile Number";
+               status=false;
+               $("#Cnumber").after(spOpen+msg+spClose);
+             }
+          }
+           // To Check first Digit
+           if(status==true)
+           if (first<6 || first>9)
+            {
+             msg="Invalid Indian Mobile Number";
+             status=false;
+             $("#Cnumber").after(spOpen+msg+spClose);
+           }
+        }
+        else {
+          msg="Invalid Mobile Number";
+          status=false;
+          $("#Cnumber").after(spOpen+msg+spClose);
+        }
+            // To validate email
+        var em = $("#Cemail").val().trim();
+        if (em.length == 0) {
+            msg = "<span class='err'>Please enter email id.</span>";
+            status = false;
+        }
+        else {
+            // Check for
+            var s = em.indexOf('@@');
+                if (s <= 0 || (em.length - s) < 5) {
+                    msg = "<span class='err'>Invalid email id.</span>";
+                    status = false;
+
+                }
+                // Check for .
+                s = em.indexOf('.');
+                if (s <= 0 || (em.length - s) < 3) {
+                    msg = "<span class='err'>Invalid email id.</span>";
+                    status = false;
+                }
+            }
+            if (msg.length > 0)
+                $("#Cemail").after(msg);
+            // End Email
+
+            // To validate name  ...
+            txt = $("#message").val().trim();
+            if (txt.length == 0) {
+                msg = "Please Enter Your Message";
+                status = false;
+                $("#message").after(spOpen + msg + spClose);
+            }
+            else if (txt.length < 15) {
+                msg = "Too short Words";
+                status = false;
+                $("#message").after(spOpen + msg + spClose);
+            }
+            return status;
+            if (status == true)
+            {
+                $("#ContactForm").submit();
+            }
+        });
+      });
+    </script>

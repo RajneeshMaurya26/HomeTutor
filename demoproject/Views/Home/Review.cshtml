@@ -1,0 +1,47 @@
+﻿  @{
+    ViewBag.Title = "Review";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+@using demoproject.Models
+@using System.Data
+<script>
+    $(document).ready(function () {
+        $(".request").click(function () {
+            var t = $(this).attr("data-tutorid");
+            window.location.href = '/Home/TutorRequest?tid='+t;
+        });
+        $(".feedback").click(function () {
+            var t = $(this).attr("data-tutorid");
+            window.location.href = '/Home/Feedback?tid=' + t;
+        });
+    });
+   
+</script>
+<br /><br />
+<div class="col-sm-12">
+      <div class="row">
+          @{
+              DBManager DB=new DBManager();
+              DB.MyCommandText = "Select * from Tutor_Registration Email";
+              DataTable dt = DB.ReadBulkRecord();
+              foreach (DataRow dr in dt.Rows)
+              {
+                  <div class="col-sm-3" style="margin-top:4%;">
+                      <div class="col-sm-12">
+                          <div class="card">
+                              <img class="card-img-top" height="180px" src="/Content/Tutor_Photo/@dr["Photo"]" alt="Card image cap" />
+                  <div class="card-body">
+                  <h5 class="card-title">@dr["Name"]</h5>
+                   <p class="card-text"><span><b>Subject :</b></span>@dr["Subject"]</p>
+                  <p class="card-text"><span><b>H. Qualification :</b></span>@dr["Qualification"]</p>
+                      <input type="button" value="Request For Tutuion" class="form-control btn btn-success request" data-tutorid="@dr["Email"]" /><br /><br />
+                      <input type="button" value="FEEDBACK" class="form-control btn btn-success feedback" data-tutorid="@dr["Email"]" />
+                      </div>
+                          </div>
+                      </div>
+                  </div>
+              }
+           }
+      </div>
+    </div>
+

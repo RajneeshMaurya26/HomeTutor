@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Tution_Request";
+    Layout = "~/Views/Shared/Tutorzone_Comman_Layout.cshtml";
+}
+@using System.Data
+@using demoproject.Models
+@{
+    if(TempData["msg"] != null)
+    {
+     <script>
+         alert('@TempData["msg"]');
+     </script>   
+    }
+}
+<div class="col-sm-12">
+    <br />
+    <br />
+    <h2>Manage Tution Request</h2>
+    <hr />
+</div>
+<div class="12">
+         <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Data Table</div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <table id="default-datatable" class="table table-bordered">
+                <thead>
+                    <tr>
+                <th>S.NO</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>Subject</th>
+                <th>Exp.Date</th>
+                <th>Description</th>
+                <th>Date_Of_Request</th>
+                        <th>Accept</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                                   <tr>
+          @{
+              DBManager dm =new DBManager();
+              dm.MyCommandText = "Select * from TRequest where Finelize !='' AND Finelize='TRUE' or Finelize='FALSE' and RequestId='"+TempData["Email"]+"'";
+              DataTable dt = dm.ReadBulkRecord();
+              int n=1;
+              foreach(DataRow dr in dt.Rows)
+              { 
+                    <tr>
+                    <td>@n</td>
+                    <td>@dr["Name"]</td>
+                    <td>@dr["Gender"]</td>
+                    <td>@dr["Course"]</td>
+                    <td>@dr["Subject"]</td>
+                    <td>@dr["ExpectedDate"]</td>
+                    <td>@dr["Description"]</td>
+                    <td>@dr["Date_of_Request"]</td>
+                        <td><a href="AcceptRequest?n=@dr["RequestId"]">
+                            @{
+                  if (dr["Finelize"].ToString().ToUpper() == "TRUE")
+                  {
+                      <span class="btn btn-info">Accept</span>
+                  }
+                  else
+                  {
+                   <span class="btn btn-success">Accepted</span>   
+                  }
+                            }
+                                
+                            </a></td>
+                    </tr>
+                  n++;
+              }
+              
+            }
+    </tr>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                 <th>S.NO</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>Subject</th>
+                <th>Exp.Date</th>
+                <th>Description</th>
+                <th>Date_Of_Request</th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Row-->
+</div>

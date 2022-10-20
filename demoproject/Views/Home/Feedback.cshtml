@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+@using System.Data
+@using demoproject.Models
+
+<script src="~/Content/JS/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var v = window.location.href.lastIndexOf('=');
+        if (v > 0) {
+            var m = window.location.href.substr(v + 1);
+            $("#m").val(m);
+        }
+    });
+</script>
+@{
+    if(TempData["msg"] !=null)
+    {
+     <script>
+         alert('@TempData["msg"]');
+     </script>   
+    }
+}
+
+<div class="col-sm-12">
+    <br />
+    <h1 class="text-center">Comment Here !</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4" style="border:1px solid black;">
+            @using(Html.BeginForm("Feedback","Home",FormMethod.Post,new {}))
+            {
+                <div class="row">
+    <div class="col-sm-12">
+        <br /><br />
+        @Html.TextBox("Name", null, new { @class = "form-control",placeholder="Enter Your Name",required="required"})
+     
+    </div>
+       &nbsp;
+      <div class="col-sm-12">
+          @Html.TextArea("Review", null, new {@class="form-control",placeholder="Discription",required="required"})
+    </div>
+        @Html.TextBox("m", null, new {@class="form-control",style="display:none;"})
+      &nbsp;
+      <div class="col-sm-12">
+      <input type="submit" value="Submit" class="form-control btn btn-success" />
+    </div>
+       &nbsp;
+                    </div>
+            }
+             
+            
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+                    @{
+                        if(TempData["TutorID"] != null)
+                        {
+                            DBManager dm1 = new DBManager();  
+                        dm1.MyCommandText = "Select * from Tutor_Registration where Email='" + TempData["TutorID"] + "'";
+                        DataTable dt = dm1.ReadBulkRecord(); 
+                        foreach(DataRow ds in dt.Rows)
+                        {
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p>
+                                        <img height="60px" width="70px" src="/Content/Tutor_Photo/@ds["Photo"]" class="rounded-circle"/></p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class
+                                            .="text-center">@ds["Name"]</p>
+                                    </div>
+                                    </div>
+                                </div>
+                           
+                        }
+                     DBManager dm2 = new DBManager();
+                     dm2.MyCommandText = "Select* from Feedback where TutorId='"+TempData["TutorID"]+"'";
+                            dt = dm2.ReadBulkRecord(); 
+                                  foreach(DataRow dr in dt.Rows)
+                                    {
+                                       
+                                     <div class="col-sm-12">
+                                     <div class="right">
+                                     <p style="margin-top: 0px;margin-bottom: 0px;color:green;font-size: 11px;">@dr["Name"]</p>
+                                         <p  style="margin-bottom: 0px;font-size: 8px;">@dr["Reviews"]</p>
+                                    <p style="float: left;margin-bottom: 0px;color:red;font-size: 11px;">@dr["Date_Of_Feedback"]</p>
+                                         </div>
+                                            
+                                        <hr />
+                                    </div>
+                                    }
+                        }
+                        }
+        <div class="col-sm-1"></div>
+    </div>
+    
+</div>
+    </div>
+<style>
+    .right {
+  position: relative;
+  background: white;
+  text-align: right;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  float: right;
+  right: 20px;
+}
+
+.right::before {
+  content: '';
+  position: absolute;
+  visibility: visible;
+  top: -1px;
+  right: -10px;
+  border: 10px solid transparent;
+  border-top: 10px solid #ccc;
+}
+
+.right::after {
+  content: '';
+  position: absolute;
+  visibility: visible;
+  top: 0px;
+  right: -8px;
+  border: 10px solid transparent;
+  border-top: 10px solid white;
+  clear: both;
+  
+}
+
+div{
+  clear: right;
+}
+
+.right img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+}
+</style>

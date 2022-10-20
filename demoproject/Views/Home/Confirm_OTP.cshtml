@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Confirm_OTP";
+    Layout = "~/Views/Shared/Home_common_layout.cshtml";
+}
+
+    <div class="col-sm-12">
+        <h1 class="text-center text-success">Confirm Password Here</h1>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                @using (Html.BeginForm("Confirm_OTP", "Home", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                {
+                    @Html.TextBox("cotp", null, new {@class="form-control",placeholder="Enter Your Email",required="required"})
+                    <br />
+                    <br />
+                    <input type="submit" value="Get OTP" class="btn btn-success" />
+
+                }
+                
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>

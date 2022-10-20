@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "CurrentTution";
+    Layout = "~/Views/Shared/Adminzone_Comman_Layout.cshtml";
+}
+
+@using System.Data
+@using demoproject.Models
+    <div class="col-sm-12">
+<h2>My_Tutions</h2>
+    <hr />
+</div>
+<div class="12">
+         <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Data Table</div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <table id="default-datatable" class="table table-bordered">
+                <thead>
+                    <tr>
+                <th>S.NO</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>Subject</th>
+                <th>Tutor Email</th>
+                <th>Student Email</th>
+                <th>Exp.Date</th>
+                <th>Description</th>
+                <th>Date_Of_Request</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                                   <tr>
+          @{
+              DBManager dm =new DBManager();
+              dm.MyCommandText = "Select * from TRequest where Finelize !='' AND Finelize !='TRUE' or Finelize='FALSE' order by Id desc";
+              DataTable dt = dm.ReadBulkRecord();
+              int n=1;
+              foreach(DataRow dr in dt.Rows)
+              { 
+                    <tr>
+                    <td>@n</td>
+                    <td>@dr["Name"]</td>
+                    <td>@dr["Gender"]</td>
+                    <td>@dr["Course"]</td>
+                    <td>@dr["Subject"]</td>
+                        <td>@dr["RequestId"]</td>
+                        <td>@dr["Email"]</td>
+                    <td>@dr["ExpectedDate"]</td>
+                    <td>@dr["Description"]</td>
+                    <td>@dr["Date_of_Request"]</td>
+                        
+                    </tr>
+                  n++;
+              }
+              
+            }
+    </tr>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                 <th>S.NO</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>Subject</th>
+                <th>Tutor Email</th>
+                <th>Student Email</th>
+                <th>Exp.Date</th>
+                <th>Description</th>
+                <th>Date_Of_Request</th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Row-->
+</div>
